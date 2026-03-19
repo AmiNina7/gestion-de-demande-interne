@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gestion des Demandes</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- En-tête -->
+  <div class="entete">
+    <h1>📋 Gestion des Demandes Internes</h1>
+    <button class="btn-nouveau" onclick="openModal()">+ Nouvelle demande</button>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat-box">
+      <span id="total">0</span><p>Total</p>
+    </div>
+    <div class="stat-box orange">
+      <span id="nb-attente">0</span><p>En attente</p>
+    </div>
+    <div class="stat-box bleu">
+      <span id="nb-cours">0</span><p>En cours</p>
+    </div>
+    <div class="stat-box vert">
+      <span id="nb-traite">0</span><p>Traités</p>
+    </div>
+    <div class="stat-box rouge">
+      <span id="nb-rejete">0</span><p>Rejetés</p>
+    </div>
+  </div>
+
+  <!-- Filtres -->
+  <div class="filtres">
+    <input type="text" id="recherche" placeholder="🔍 Rechercher..." oninput="afficher()"/>
+    <select id="fil-dept" onchange="afficher()">
+      <option value="">Tous les départements</option>
+      <option>Informatique</option>
+      <option>Ressources Humaines</option>
+      <option>Finance</option>
+      <option>Marketing</option>
+      <option>Juridique</option>
+      <option>Direction</option>
+    </select>
+    <select id="fil-statut" onchange="afficher()">
+      <option value="">Tous les statuts</option>
+      <option value="en_attente">En attente</option>
+      <option value="en_cours">En cours</option>
+      <option value="traite">Traité</option>
+      <option value="rejete">Rejeté</option>
+    </select>
+  </div>
+
+  <!-- Tableau -->
+  <div class="tableau">
+    <table>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Département</th>
+          <th>Description</th>
+          <th>Date</th>
+          <th>Statut</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+
+  <!-- Modal Ajout / Modification -->
+  <div class="modal-fond" id="modal" style="display:none">
+    <div class="modal-boite">
+      <h2 id="modal-titre">Nouvelle demande</h2>
+
+      <div class="form-ligne">
+        <div>
+          <label>Nom *</label>
+          <input type="text" id="f-nom" placeholder="Ex: Jean Dupont"/>
+        </div>
+        <div>
+          <label>Département *</label>
+          <select id="f-dept">
+            <option value="">— Choisir —</option>
+            <option>Informatique</option>
+            <option>Ressources Humaines</option>
+            <option>Finance</option>
+            <option>Marketing</option>
+            <option>Juridique</option>
+            <option>Direction</option>
+          </select>
+        </div>
+      </div>
+
+      <label>Description *</label>
+      <textarea id="f-desc" placeholder="Décrivez la demande..."></textarea>
+
+      <div class="form-ligne">
+        <div>
+          <label>Date *</label>
+          <input type="date" id="f-date"/>
+        </div>
+        <div>
+          <label>Statut</label>
+          <select id="f-statut">
+            <option value="en_attente">En attente</option>
+            <option value="en_cours">En cours</option>
+            <option value="traite">Traité</option>
+            <option value="rejete">Rejeté</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="modal-btns">
+        <button class="btn-annuler" onclick="closeModal()">Annuler</button>
+        <button class="btn-valider" id="btn-submit" onclick="soumettre()">Ajouter</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
